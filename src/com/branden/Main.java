@@ -38,7 +38,7 @@ public class Main {
 
             if ( referee.checkForWild( card ) ){
                 referee.pickSuite( deck );
-                System.out.println("\n----------------------\nThe suite is : " +  referee.getValidSuite() +"\n----------------------\n");
+                System.out.println("\n----------------------\nThe suite is : " +  referee.getValidSuite() +"\n--- -------------------\n");
 
             }
             //player2.viewHand();
