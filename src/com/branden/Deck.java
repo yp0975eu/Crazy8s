@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class Deck {
     private int deckSize = 52;
-    private String[] suites = {"Spades","Clubs","Hearts","Diamonds"};
+    private final static String[] suites = {"Spades","Clubs","Hearts","Diamonds"};
     private ArrayList unShuffledDeck = new ArrayList();
     private ArrayList shuffledDeck = new ArrayList();
     // contains the string value of a valid suite that can be played
@@ -60,7 +60,7 @@ public class Deck {
 
     }
 
-    public String[] getSuites( ){
+    public static String[] getSuites( ){
         return suites;
     }
 

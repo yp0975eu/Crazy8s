@@ -6,13 +6,14 @@ public class Main {
 
         Deck deck = new Deck();
         Player player1 = new Player("Branden");
-        Player player2 = new Player("Computer");
+        Computer player2 = new Computer();
         Referee referee = new Referee();
         deck.deal(player1, player2);
 
         // flip the first card
         int card = deck.getCard();
         referee.addToDiscardPile( card );
+        // suite is the first card's suite
         referee.setValidSuite( referee.getLastPlayedCard().getSuit());
         referee.viewLastPlayedCard();
 
@@ -33,11 +34,12 @@ public class Main {
             referee.addToDiscardPile(card);
             referee.setValidSuite( referee.getLastPlayedCard().getSuit() );
 
-            System.out.println("\n--You Played A Card--");
             referee.viewLastPlayedCard();
 
             if ( referee.checkForWild( card ) ){
                 referee.pickSuite( deck );
+                System.out.println("\n----------------------\nThe suite is : " +  referee.getValidSuite() +"\n----------------------\n");
+
             }
             //player2.viewHand();
             // check if player 2 can play card
@@ -45,6 +47,7 @@ public class Main {
             //card = player2.pickCard();
 
             card = player2.autoPick( referee.getLastPlayedCard().getIntValue(), referee.getValidSuite() );
+
             while (!referee.playedCardValid( card )) {
                 //card = player2.pickCard();
                 card = player2.autoPick( referee.getLastPlayedCard().getIntValue(), referee.getValidSuite() );
@@ -53,7 +56,12 @@ public class Main {
 
             player2.discardCard(card);
             referee.addToDiscardPile(card);
-            System.out.println("\nComputer Played Card");
+            referee.setValidSuite( referee.getLastPlayedCard().getSuit() );
+            if ( referee.checkForWild( card ) ){
+
+                referee.setValidSuite( player2.autoPickSuite() );
+                System.out.println("\n----------------------\nThe suite is : " +  referee.getValidSuite() +"\n----------------------\n");
+            }
             referee.viewLastPlayedCard();
 
 
@@ -61,6 +69,8 @@ public class Main {
         if ( deck.getDeckSize() == 0){
             System.out.println("We ran out of cards. Game Over");
         }
+        // display winner
+        // TODO get scoring to work after game is over
         System.out.println("Game Over");
     }
 }

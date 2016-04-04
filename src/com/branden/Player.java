@@ -8,10 +8,9 @@ import java.util.*;
 public class Player {
     private String name;
     private int score;
-    private ArrayList hand = new ArrayList();
+    protected ArrayList<Integer> hand = new ArrayList();
     Scanner userInput = new Scanner( System.in );
     private Boolean hasMove = false;
-    private Boolean canMakeMove = false;
 
     Player( String name ){
         setName(name);
@@ -48,13 +47,14 @@ public class Player {
         this.name = name;
     }
 
+    /* TODO get scoring to work after game is finished
     public int getScore() {
         return score;
     }
 
     public void setScore(int score) {
         this.score = score;
-    }
+    }*/
 
     // get card int value from hand
     public int pickCard(){
@@ -77,7 +77,7 @@ public class Player {
             }
         }
         // get selection from hand
-        card = (int) hand.get(input);
+        card = hand.get(input);
 
         // print out the string representation of the card
         System.out.println(
@@ -125,32 +125,6 @@ public class Player {
         return getHasMove();
     }
 
-    // The computer's logic to choose a card
-    public int autoPick(int lastPlayedCard, String validSuite){
-        Card card;
-        int cardInt = -1;
-        Card lastCard = new Card ( lastPlayedCard );
-        Boolean canPlay = false;
 
-        for (int i = 0; i < hand.size(); i++) {
-
-            cardInt = (int ) hand.get(i);
-            card = new Card( cardInt );
-
-            // if last card was 8 then check the deck for a the valid suite
-            if ( lastCard.getValue() == 8 ){
-                canPlay = card.getSuit().equalsIgnoreCase( validSuite );
-            } else {
-                canPlay = card.getSuit().equalsIgnoreCase( lastCard.getSuit() );
-            }
-
-            if ( canPlay || card.getValue() == 8 || card.getValue() == lastCard.getValue() ){
-                // print out the string representation of the card
-                System.out.println( "Computer chose: " + getCardString( cardInt  ) );
-                return cardInt;
-            }
-        }
-        return cardInt;
-    }
 
 }

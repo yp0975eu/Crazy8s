@@ -72,7 +72,6 @@ public class Referee {
             }
         }
         setValidSuite( suites[suiteNumber] );
-        System.out.println("\n----------------------\nThe new suite is : " + getValidSuite() +"\n----------------------\n");
     }
     public void addToDiscardPile( int playedCard){
         discardPile.add(playedCard);
@@ -99,7 +98,7 @@ public class Referee {
 
     public void checkHand( Player player, Deck deck){
         while ( !player.canPlayCard( getLastPlayedCard().getIntValue(), getValidSuite() ) ) {
-            System.out.println("You must draw a card");
+            System.out.println("Must draw a card");
             player.addCard( deck.getCard() );
         }
     }
