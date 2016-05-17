@@ -40,13 +40,13 @@ public class Card {
         String suitName;
         String symbolString;
         // 0 -12 Spades
-        if ( cardNumber < 12){
+        if ( isSpade( cardNumber) ){
             suitName = "Spades";
             symbolString = "\u2664";
         }
         // if it's grater than 12 then it's not a spade so it has to be one of the other suites
         // if it's passed the first if, then it's greater than 12 and so check if it's a club, etc...
-        else if ( cardNumber < 25){
+        else if ( isClub( cardNumber) ){
             suitName = "Clubs";
             symbolString = "\u2667";
 
@@ -65,6 +65,20 @@ public class Card {
         }
         this.symbol = symbolString;
         this.suit = suitName;
+    }
+    public boolean isSpade( int cardInt){
+        boolean finding = false;
+        if ( cardInt >= 0 && cardInt <= 12 ){
+            finding = true;
+        }
+        return finding;
+    }
+    public boolean isClub( int cardInt){
+        boolean finding = false;
+        if ( cardInt >= 13 && cardInt <= 38 ){
+            finding = true;
+        }
+        return finding;
     }
     public String getSymbol() {
         return symbol;
